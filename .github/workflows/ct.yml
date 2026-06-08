@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Continuous Testing
 
 on:
   push:
@@ -10,8 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  compile:
-    name: Compile Project
+  testing:
+    name: Unit Testing
     runs-on: ubuntu-latest
 
     steps:
@@ -25,8 +25,5 @@ jobs:
           java-version: ${{ vars.JAVA_VERSION || '21' }}
           cache: maven
 
-      - name: Validate Maven Project
-        run: mvn -B validate
-
-      - name: Compile Application
-        run: mvn -B clean compile
+      - name: Run Unit Test
+        run: mvn -B test
