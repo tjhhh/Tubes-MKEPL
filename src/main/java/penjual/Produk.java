@@ -84,8 +84,7 @@ public class Produk {
                 com.method.main.ConsoleUI.println("1. Balas Ulasan");
                 com.method.main.ConsoleUI.println("2. Lapor Ulasan");
                 com.method.main.ConsoleUI.println("3. Keluar");
-                com.method.main.ConsoleUI.print("Pilih menu: ");
-                int pilih = scanner.nextInt();
+                int pilih = com.method.main.ConsoleUI.getPilihan(scanner, "Pilih menu: ");
 
                 switch(pilih) {
                     case 1 :

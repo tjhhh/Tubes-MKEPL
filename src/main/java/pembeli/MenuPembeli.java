@@ -28,9 +28,7 @@ public class MenuPembeli implements Menu {
 
         while (true) {
             tampilkanMenu();
-            com.method.main.ConsoleUI.print("Pilih menu : ");
-            pilihan = scanner.nextInt();
-            scanner.nextLine();
+            pilihan = com.method.main.ConsoleUI.getPilihan(scanner, "Pilih menu : ");
 
             switch (pilihan) {
                 case 1:

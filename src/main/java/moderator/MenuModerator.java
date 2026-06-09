@@ -29,9 +29,7 @@ public class MenuModerator implements Menu {
 
         while (true) {
             tampilkanMenu();
-            com.method.main.ConsoleUI.print("Pilih aksi: ");
-            pilihan = scanner.nextInt();
-            scanner.nextLine(); 
+            pilihan = com.method.main.ConsoleUI.getPilihan(scanner, "Pilih aksi: ");
 
             switch (pilihan) {
                 case 1:

@@ -27,9 +27,7 @@ public class MenuPenjual implements Menu {
         
         while (true) {
             tampilkanMenu();
-            com.method.main.ConsoleUI.print("Pilih menu: ");
-            int pilihan = scanner.nextInt();
-            scanner.nextLine();
+            int pilihan = com.method.main.ConsoleUI.getPilihan(scanner, "Pilih menu: ");
 
             switch (pilihan) {
                 case 1:

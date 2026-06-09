@@ -17,4 +17,11 @@ public class ConsoleUI {
     public static void println() {
         System.out.println();
     }
+
+    public static int getPilihan(java.util.Scanner scanner, String prompt) {
+        print(prompt);
+        int pilihan = scanner.nextInt();
+        scanner.nextLine();
+        return pilihan;
+    }
 }
