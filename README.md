@@ -76,3 +76,83 @@ Untuk menjaga validitas ulasan, sistem ini mengimplementasikan metode **validasi
 ## Class Diagram
 ![Diagram Class TUBES DPBO jpeg](https://github.com/user-attachments/assets/3202b6d5-4107-4f50-9034-26bba3c2cfa5)
 
+---
+
+## 1. Arsitektur Pipeline CI/CD
+
+Proyek ini menerapkan alur otomatisasi *Continuous Integration* (CI), *Continuous Testing* (CT), *Continuous Inspection*, dan *Continuous Deployment* (CD) menggunakan GitHub Actions.
+
+```mermaid
+graph TD
+    A[Push / PR ke develop] -->|Trigger| B(CI: Build & Compile)
+    A -->|Trigger| C(CT: Run Unit Tests JUnit 5)
+    A -->|Trigger| D(Continuous Inspection: SonarCloud)
+    
+    E[Merge ke main] -->|Trigger| F(Continuous Deployment)
+    F --> G[Package JAR via Maven]
+    F --> H[Publish ke GitHub Releases]
+    F --> I[Publish ke GitHub Packages]
+```
+
+Alur kerja branching yang diterapkan:
+- **Branch `develop`**: Digunakan sebagai tempat pengembangan fitur baru. Setiap ada `push` atau `pull_request` ke branch `develop` (atau branch fitur), sistem otomatis memicu workflow CI (Validasi & Kompilasi), CT (Unit Testing), dan Continuous Inspection (SonarCloud) untuk memastikan kualitas kode terjaga.
+- **Branch `main`**: Branch produksi utama. Penggabungan kode (*merge*) ke branch `main` secara otomatis memicu proses **Continuous Deployment (CD)** untuk membuat rilis baru di GitHub Releases beserta pemublikasian paket `.jar` ke GitHub Packages.
+
+---
+
+## 2. Pembagian Tugas Kelompok
+
+| Nama Anggota | Tanggung Jawab / Komponen |
+| :--- | :--- |
+| **Dhea Sri Noor Septianiz** | Komponen Pelanggan (`Pembeli`, `Komentar`, `Rating`), Pembuatan Unit Test `KomentarTest` |
+| **Rahmah Aisyah** | Komponen Penjual (`Penjual`, `Produk`), Pembuatan Unit Test `ProdukTest` |
+| **Luthfirezkiansyah11** / **tjhhh** | Konfigurasi CI/CD, Maven `pom.xml`, Integrasi SonarCloud & GitHub Packages |
+| **Muhammad Fauzan** / **ojan** | Komponen `Moderator`, `Main`, `Menu` |
+| **Raffarizzy** | Komponen Moderator (`HapusUlasan`, `RiwayatModerasi`) |
+
+*(Silakan sesuaikan tabel pembagian tugas di atas dengan kesepakatan riil kelompok Anda)*
+
+---
+
+## 3. Tools dan Teknologi Pipeline CI/CD
+
+| Tahap Pipeline | Tools / Teknologi | Deskripsi |
+| :--- | :--- | :--- |
+| **Version Control System** | Git & GitHub | Penyimpanan repositori, strategi branching (`develop`/`main`), dan pemicu alur kerja. |
+| **Package & Build Tool** | Apache Maven (v3) | Manajemen dependensi, kompilasi proyek, dan proses pemaketan aplikasi. |
+| **Continuous Integration (CI)** | GitHub Actions | Orkestrasi otomatisasi untuk compile proyek pada setiap push/PR. |
+| **Continuous Testing (CT)** | JUnit 5 & JaCoCo | Kerangka kerja unit testing (Surefire plugin) dan analisis cakupan kode (*code coverage*). |
+| **Continuous Inspection** | SonarCloud | Analisis statis kualitas kode, pemindaian potensi bug, kerentanan keamanan, serta Quality Gate. |
+| **Continuous Deployment (CD)** | GitHub Releases & Packages | Tempat publikasi otomatis berkas executable `.jar` siap pakai. |
+
+---
+
+## 4. Panduan Menjalankan Proyek Secara Lokal
+
+### Prasyarat:
+- Pastikan sudah ter-install **Java Development Kit (JDK 21)**.
+- Pastikan sudah ter-install **Apache Maven**.
+
+### Langkah-langkah:
+1. **Clone Repositori**:
+   ```bash
+   git clone https://github.com/tjhhh/Tubes-MKEPL.git
+   cd Tubes-MKEPL
+   ```
+2. **Kompilasi & Pemaketan Aplikasi**:
+   Jalankan perintah berikut untuk mengunduh dependensi, mengompilasi kode, dan membungkus aplikasi menjadi berkas `.jar`:
+   ```bash
+   mvn clean package
+   ```
+3. **Menjalankan Aplikasi**:
+   Setelah proses package selesai, jalankan berkas `.jar` yang dihasilkan di dalam folder `target/`:
+   ```bash
+   java -jar target/main-1.0-SNAPSHOT.jar
+   ```
+4. **Menjalankan Unit Test secara Lokal**:
+   Untuk mengeksekusi semua berkas pengujian JUnit 5 di komputer lokal, gunakan perintah:
+   ```bash
+   mvn test
+   ```
+
+
