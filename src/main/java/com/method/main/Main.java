@@ -7,21 +7,25 @@ import moderator.Moderator;
 import penjual.Penjual;
 
 public class Main {
+    private static final String BORDER_EQUAL = "|============================================================================|";
+    private static final String BORDER_DASH  = "|----------------------------------------------------------------------------|";
+    private static final String BORDER_EMPTY = "|                                                                            |";
+
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                System.out.println("|========================= SISTEM ULASAN TOKO ONLINE ========================|");
-                System.out.println("|                                                                            |");
-                System.out.println("|----------------------------------------------------------------------------|");
-                System.out.println("|                                  M E N U                                   |");
-                System.out.println("|----------------------------------------------------------------------------|");
-                System.out.println("|  1. Login sebagai Pembeli                                                  |");
-                System.out.println("|  2. Login sebagai Penjual                                                  |");
-                System.out.println("|  3. Login sebagai Moderator                                                |");
-                System.out.println("|  4. Keluar dari Sistem                                                     |");
-                System.out.println("|============================================================================|");
-                System.out.print("Pilih menu: ");
+                ConsoleUI.println("|========================= SISTEM ULASAN TOKO ONLINE ========================|");
+                ConsoleUI.println(BORDER_EMPTY);
+                ConsoleUI.println(BORDER_DASH);
+                ConsoleUI.println("|                                  M E N U                                   |");
+                ConsoleUI.println(BORDER_DASH);
+                ConsoleUI.println("|  1. Login sebagai Pembeli                                                  |");
+                ConsoleUI.println("|  2. Login sebagai Penjual                                                  |");
+                ConsoleUI.println("|  3. Login sebagai Moderator                                                |");
+                ConsoleUI.println("|  4. Keluar dari Sistem                                                     |");
+                ConsoleUI.println(BORDER_EQUAL);
+                ConsoleUI.print("Pilih menu: ");
 
                 int pilihan = scanner.nextInt();
                 scanner.nextLine(); 
@@ -37,19 +41,19 @@ public class Main {
                         Moderator.loginModerator(scanner);
                         break;
                     case 4:
-                        System.out.println("|============================================================================|");
-                        System.out.println("|                Terima kasih telah menggunakan layanan kami!                |");
-                        System.out.println("|============================================================================|");
+                        ConsoleUI.println(BORDER_EQUAL);
+                        ConsoleUI.println("|                Terima kasih telah menggunakan layanan kami!                |");
+                        ConsoleUI.println(BORDER_EQUAL);
                         scanner.close();
                         return;
                     default:
-                        System.out.println("Pilihan tidak valid. Mohon pilih menu yang tersedia.");
+                        ConsoleUI.println("Pilihan tidak valid. Mohon pilih menu yang tersedia.");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Input tidak valid. Harap masukkan angka.");
+                ConsoleUI.println("Input tidak valid. Harap masukkan angka.");
                 scanner.nextLine(); 
             } catch (Exception e) {
-                System.out.println("Terjadi kesalahan: " + e.getMessage());
+                ConsoleUI.println("Terjadi kesalahan: " + e.getMessage());
                 throw e; 
             }
         }

@@ -21,7 +21,7 @@ public abstract class Pengguna {
         if (nama != null && !nama.isEmpty()) {
             this.nama = nama;
         } else {
-            System.out.println("Nama tidak boleh kosong.");
+            com.method.main.ConsoleUI.println("Nama tidak boleh kosong.");
         }
     }
 
@@ -33,7 +33,7 @@ public abstract class Pengguna {
         if (email != null && email.contains("@")) {
             this.email = email;
         } else {
-            System.out.println("Email tidak valid.");
+            com.method.main.ConsoleUI.println("Email tidak valid.");
         }
     }
 
@@ -45,7 +45,7 @@ public abstract class Pengguna {
         if (password != null && password.length() >= 6) {
             this.password = password;
         } else {
-            System.out.println("Password harus memiliki minimal 6 karakter.");
+            com.method.main.ConsoleUI.println("Password harus memiliki minimal 6 karakter.");
         }
     }
 
@@ -57,16 +57,16 @@ public abstract class Pengguna {
         if (nomorTelepon != null && nomorTelepon.length() >= 10) {
             this.nomorTelepon = nomorTelepon;
         } else {
-            System.out.println("Nomor telepon harus memiliki minimal 10 digit.");
+            com.method.main.ConsoleUI.println("Nomor telepon harus memiliki minimal 10 digit.");
         }
     }
 
     public abstract void jenisPengguna();
 
     public void tampilkanProfil() {
-        System.out.println("Nama         : " + nama);
-        System.out.println("Email        : " + email);
-        System.out.println("Nomor Telepon: " + nomorTelepon);
-        System.out.println();
+        com.method.main.ConsoleUI.println("Nama         : " + nama);
+        com.method.main.ConsoleUI.println("Email        : " + email);
+        com.method.main.ConsoleUI.println("Nomor Telepon: " + nomorTelepon);
+        com.method.main.ConsoleUI.println();
     }
 }

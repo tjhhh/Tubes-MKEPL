@@ -1,0 +1,10 @@
+# Maven
+/target/
+# Temporary Script
+refactor.py
+# VS Code / IDE settings
+.vscode/
+.settings/
+.classpath
+.project
+*.log

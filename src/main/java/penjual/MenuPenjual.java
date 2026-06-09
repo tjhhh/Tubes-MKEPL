@@ -6,8 +6,6 @@ import java.util.Scanner;
 public class MenuPenjual implements Menu {
     private Penjual penjual;
     private Produk produk;
-    private Scanner scanner = new Scanner(System.in);
-
     public MenuPenjual(Penjual penjual) {
         this.penjual = penjual;
         this.produk = new Produk();
@@ -18,32 +16,33 @@ public class MenuPenjual implements Menu {
     
     @Override
     public void tampilkanMenu() {
-        System.out.println("============================== Menu Penjual ==================================");
-        System.out.println("1. Daftar Produk");
-        System.out.println("2. Profil");
-        System.out.println("3. Keluar");
+        com.method.main.ConsoleUI.println("============================== Menu Penjual ==================================");
+        com.method.main.ConsoleUI.println("1. Daftar Produk");
+        com.method.main.ConsoleUI.println("2. Profil");
+        com.method.main.ConsoleUI.println("3. Keluar");
     }
 
     @Override
-    public void aksi() {
+    public void aksi(Scanner scanner) {
         
         while (true) {
             tampilkanMenu();
-            System.out.print("Pilih menu: ");
+            com.method.main.ConsoleUI.print("Pilih menu: ");
             int pilihan = scanner.nextInt();
+            scanner.nextLine();
 
             switch (pilihan) {
                 case 1:
-                    produk.menuProduk();
+                    produk.menuProduk(scanner);
                     break;
                 case 2:
                     penjual.jenisPengguna();
                     break;
                 case 3:
-                    System.out.println("Keluar dari menu penjual.");
+                    com.method.main.ConsoleUI.println("Keluar dari menu penjual.");
                     return;
                 default:
-                    System.out.println("Pilihan tidak valid.");
+                    com.method.main.ConsoleUI.println("Pilihan tidak valid.");
                     break;
             }
         }

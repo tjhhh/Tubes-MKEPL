@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Continuous Inspection
 
 on:
   push:
@@ -14,13 +14,15 @@ permissions:
   contents: read
 
 jobs:
-  compile:
-    name: Compile Project
+  inspection:
+    name: Sonar Inspection
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup JDK
         uses: actions/setup-java@v4
@@ -29,8 +31,10 @@ jobs:
           java-version: ${{ vars.JAVA_VERSION || '21' }}
           cache: maven
 
-      - name: Validate Maven Project
-        run: mvn -B validate
-
-      - name: Compile Application
-        run: mvn -B clean compile
+      - name: Run Sonar Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn -B clean compile org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Dsonar.token=$SONAR_TOKEN \
+          -Dsonar.qualitygate.wait=true

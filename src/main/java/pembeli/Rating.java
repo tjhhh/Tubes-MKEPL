@@ -9,7 +9,9 @@ public class Rating {
     private int ratingBintang;
     private ArrayList<Komentar> daftarKomentar;
 
-    private static ArrayList<Rating> daftarRating = new ArrayList<>() {{
+    private static ArrayList<Rating> daftarRating = new ArrayList<>();
+
+    static {
         Rating rating1 = new Rating("Laptop ABC", "Kroos", "2024-12-01", 5);
         rating1.tambahKomentar(Komentar.getDaftarKomentar().get(0));
 
@@ -22,11 +24,11 @@ public class Rating {
         Rating rating4 = new Rating("Headphone DEF", "Wanda", "2024-12-04", 5);
         rating4.tambahKomentar(Komentar.getDaftarKomentar().get(3));
 
-        add(rating1);
-        add(rating2);
-        add(rating3);
-        add(rating4);
-    }};
+        daftarRating.add(rating1);
+        daftarRating.add(rating2);
+        daftarRating.add(rating3);
+        daftarRating.add(rating4);
+    }
 
     public Rating(String namaProduk, String pengguna, String tanggalUlasan, int ratingBintang) {
         this.namaProduk = namaProduk;
@@ -71,28 +73,28 @@ public class Rating {
         for (Rating rating : daftarRating) {
             if (rating.getNamaProduk().equals(namaProduk)) {
                 ditemukan = true;
-                System.out.println("Pengguna       : " + rating.getPengguna());
-                System.out.println("Tanggal Ulasan : " + rating.getTanggalUlasan());
-                System.out.println("Rating         : " + rating.getRatingBintang() + " bintang");
-                System.out.println("Komentar       :");
+                com.method.main.ConsoleUI.println("Pengguna       : " + rating.getPengguna());
+                com.method.main.ConsoleUI.println("Tanggal Ulasan : " + rating.getTanggalUlasan());
+                com.method.main.ConsoleUI.println("Rating         : " + rating.getRatingBintang() + " bintang");
+                com.method.main.ConsoleUI.println("Komentar       :");
 
                 for (Komentar komentar : rating.getDaftarKomentar()) {
-                    System.out.println("  - " + komentar.getKomentarText());
+                    com.method.main.ConsoleUI.println("  - " + komentar.getKomentarText());
 
                     ArrayList<String> balasanList = komentar.getBalasan();
                     if (!balasanList.isEmpty()) {
-                        System.out.println("    Balasan dari penjual:");
+                        com.method.main.ConsoleUI.println("    Balasan dari penjual:");
                         for (String balasan : balasanList) {
-                            System.out.println("      -> " + balasan);
+                            com.method.main.ConsoleUI.println("      -> " + balasan);
                         }
                     }
                 }
-                System.out.println();
+                com.method.main.ConsoleUI.println();
             }
         }
 
         if (!ditemukan) {
-            System.out.println("Belum ada ulasan untuk produk ini.");
+            com.method.main.ConsoleUI.println("Belum ada ulasan untuk produk ini.");
         }
     }
 
@@ -120,7 +122,7 @@ public class Rating {
         }
 
         if (!ditemukan) {
-            System.out.println("Ulasan tidak ditemukan untuk produk " + namaProduk + " oleh pengguna " + pengguna + ".");
+            com.method.main.ConsoleUI.println("Ulasan tidak ditemukan untuk produk " + namaProduk + " oleh pengguna " + pengguna + ".");
         }
     }
 }

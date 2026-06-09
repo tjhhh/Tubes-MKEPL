@@ -13,23 +13,22 @@ public class MenuPembeli implements Menu {
 
     @Override
     public void tampilkanMenu() {
-        System.out.println("============================== Menu Pembeli ==================================");
-        System.out.println("1. Lihat Produk");
-        System.out.println("2. Lihat Produk yang Sudah Dibeli");
-        System.out.println("3. Berikan Rating Pada Produk yang Sudah Dibeli");
-        System.out.println("4. Lihat Produk yang Sudah Diberi Rating");
-        System.out.println("5. Profil");
-        System.out.println("6. Keluar");
+        com.method.main.ConsoleUI.println("============================== Menu Pembeli ==================================");
+        com.method.main.ConsoleUI.println("1. Lihat Produk");
+        com.method.main.ConsoleUI.println("2. Lihat Produk yang Sudah Dibeli");
+        com.method.main.ConsoleUI.println("3. Berikan Rating Pada Produk yang Sudah Dibeli");
+        com.method.main.ConsoleUI.println("4. Lihat Produk yang Sudah Diberi Rating");
+        com.method.main.ConsoleUI.println("5. Profil");
+        com.method.main.ConsoleUI.println("6. Keluar");
     }
 
     @Override
-    public void aksi() {
+    public void aksi(Scanner scanner) {
         int pilihan;
-        Scanner scanner = new Scanner(System.in);
 
         while (true) {
             tampilkanMenu();
-            System.out.print("Pilih menu : ");
+            com.method.main.ConsoleUI.print("Pilih menu : ");
             pilihan = scanner.nextInt();
             scanner.nextLine();
 
@@ -41,7 +40,7 @@ public class MenuPembeli implements Menu {
                     pembeli.tampilkanProdukSudahDibeli(); 
                     break;
                 case 3:
-                    pembeli.berikanRating(); 
+                    pembeli.berikanRating(scanner); 
                     break;
                 case 4:
                     pembeli.tampilkanProdukDiberiRating(); 
@@ -50,10 +49,10 @@ public class MenuPembeli implements Menu {
                     pembeli.jenisPengguna(); 
                     break;
                 case 6:
-                    System.out.println("Kembali ke menu utama ...\n");
+                    com.method.main.ConsoleUI.println("Kembali ke menu utama ...\n");
                     return; 
                 default:
-                    System.out.println("Pilihan tidak valid.");
+                    com.method.main.ConsoleUI.println("Pilihan tidak valid.");
             }
         }
     }

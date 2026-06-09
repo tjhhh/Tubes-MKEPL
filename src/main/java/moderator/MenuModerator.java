@@ -7,31 +7,29 @@ import penjual.LaporUlasan;
 
 public class MenuModerator implements Menu {
     private final Moderator moderator;
-    private final Scanner scanner;
 
     public MenuModerator(Moderator moderator) {
         this.moderator = moderator;
-        this.scanner = new Scanner(System.in);
     }
 
     @Override
     public void tampilkanMenu() {
-        System.out.println("============================= Menu Moderator =================================");
-        System.out.println("1. Lihat laporan");
-        System.out.println("2. Hapus Ulasan");
-        System.out.println("3. Lihat Riwayat Moderasi");
-        System.out.println("4. Lihat Daftar Produk");
-        System.out.println("5. Profil");
-        System.out.println("6. Keluar");
+        com.method.main.ConsoleUI.println("============================= Menu Moderator =================================");
+        com.method.main.ConsoleUI.println("1. Lihat laporan");
+        com.method.main.ConsoleUI.println("2. Hapus Ulasan");
+        com.method.main.ConsoleUI.println("3. Lihat Riwayat Moderasi");
+        com.method.main.ConsoleUI.println("4. Lihat Daftar Produk");
+        com.method.main.ConsoleUI.println("5. Profil");
+        com.method.main.ConsoleUI.println("6. Keluar");
     }
 
     @Override
-    public void aksi() {
+    public void aksi(Scanner scanner) {
         int pilihan;
 
         while (true) {
             tampilkanMenu();
-            System.out.print("Pilih aksi: ");
+            com.method.main.ConsoleUI.print("Pilih aksi: ");
             pilihan = scanner.nextInt();
             scanner.nextLine(); 
 
@@ -40,7 +38,7 @@ public class MenuModerator implements Menu {
                     lihatLaporan();
                     break;
                 case 2:
-                    HapusUlasan.hapusUlasan(moderator);
+                    HapusUlasan.hapusUlasan(moderator, scanner);
                     break;
                 case 3:
                     RiwayatModerasi.tampilkanRiwayat();
@@ -52,21 +50,21 @@ public class MenuModerator implements Menu {
                     moderator.jenisPengguna();
                     break;
                 case 6:
-                    System.out.println("Keluar dari menu moderator.");
+                    com.method.main.ConsoleUI.println("Keluar dari menu moderator.");
                     return;
                 default:
-                    System.out.println("Pilihan tidak valid.");
+                    com.method.main.ConsoleUI.println("Pilihan tidak valid.");
             }
         }
     }
 
     public void lihatProduk() {
-        System.out.println("============================= Daftar Produk =================================");
+        com.method.main.ConsoleUI.println("============================= Daftar Produk =================================");
         Produk.tampilkanSemuaProduk();
     }
     
     public void lihatLaporan() {
-        System.out.println("============================= Daftar Laporan =================================");
+        com.method.main.ConsoleUI.println("============================= Daftar Laporan =================================");
         LaporUlasan.tampilkanLaporan();
     }
 }

@@ -6,11 +6,10 @@ import java.util.Scanner;
 
 public class Moderator extends Pengguna {
     private int jumlahUlasanDihapus;
-    private Scanner scanner;
         
-    private static final ArrayList<Moderator> daftarModerator = new ArrayList<>() {{
-        add(new Moderator("Raffa Rizky Febryan ", "raffa@gmail.com", "raffa123", "085138229382"));
-    }};
+    private static final ArrayList<Moderator> daftarModerator = new ArrayList<>(
+        java.util.Arrays.asList(new Moderator("Raffa Rizky Febryan ", "raffa@gmail.com", "raffa123", "085138229382"))
+    );
 
     public Moderator(String nama, String email, String password, String nomorTelepon) {
         super(nama, email, password, nomorTelepon);
@@ -19,33 +18,33 @@ public class Moderator extends Pengguna {
 
     public static void loginModerator(Scanner scan) { 
         while (true) { 
-            System.out.println("================================ Login Moderator =============================");
-            System.out.println("Ketik 'exit'untuk keluar dari login moderator.");
-            System.out.print("Email: ");
+            com.method.main.ConsoleUI.println("================================ Login Moderator =============================");
+            com.method.main.ConsoleUI.println("Ketik 'exit'untuk keluar dari login moderator.");
+            com.method.main.ConsoleUI.print("Email: ");
             String email = scan.nextLine();
             if (email.equalsIgnoreCase("exit")) {
-                System.out.println("Anda keluar dari login penjual.");
+                com.method.main.ConsoleUI.println("Anda keluar dari login penjual.");
                 break; 
             }
-            System.out.print("Password: ");
+            com.method.main.ConsoleUI.print("Password: ");
             String password = scan.nextLine();
 
             Moderator moderator = cariModerator(email, password);
             if (moderator != null) {
-                System.out.println("Login berhasil. Selamat datang, " + moderator.getNama() + "!");
+                com.method.main.ConsoleUI.println("Login berhasil. Selamat datang, " + moderator.getNama() + "!");
                 MenuModerator menu = new MenuModerator(moderator);
-                menu.aksi(); 
+                menu.aksi(scan); 
             } else {
-                System.out.println("Login gagal. Email atau password salah. Coba lagi.");
+                com.method.main.ConsoleUI.println("Login gagal. Email atau password salah. Coba lagi.");
             }
         }
     }
      
     @Override
     public void jenisPengguna(){
-        System.out.println("================================== Moderator =================================");
+        com.method.main.ConsoleUI.println("================================== Moderator =================================");
         super.tampilkanProfil();
-        System.out.println("Jumlah Ulasan Dihapus : " + jumlahUlasanDihapus);
+        com.method.main.ConsoleUI.println("Jumlah Ulasan Dihapus : " + jumlahUlasanDihapus);
     }
 
     public static Moderator cariModerator(String email, String password) {

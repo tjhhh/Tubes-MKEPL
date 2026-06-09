@@ -7,11 +7,10 @@ import java.util.Scanner;
 import pembeli.Rating;
 
 public class HapusUlasan {
-    public static void hapusUlasan(Moderator moderator) {
+    public static void hapusUlasan(Moderator moderator, Scanner scanner) {
         Produk.initializeDaftarProduk();
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Masukan nama produk: ");
+        com.method.main.ConsoleUI.print("Masukan nama produk: ");
         String namaProduk = scanner.nextLine();
         boolean produkDitemukan = false;
 
@@ -21,7 +20,7 @@ public class HapusUlasan {
             for (Produk p : produkList) {
                 if (namaProduk.equalsIgnoreCase(p.getNama())) {
                     produkDitemukan = true;
-                    System.out.println("Produk dengan nama \"" + namaProduk + "\" ditemukan.");
+                    com.method.main.ConsoleUI.println("Produk dengan nama \"" + namaProduk + "\" ditemukan.");
                     break;
                 }
             }
@@ -31,11 +30,11 @@ public class HapusUlasan {
         }
 
         if (!produkDitemukan) {
-            System.out.println("Nama produk tidak ditemukan!");
+            com.method.main.ConsoleUI.println("Nama produk tidak ditemukan!");
             return;
         }
 
-        System.out.print("Masukkan nama pengguna yang memberi ulasan: ");
+        com.method.main.ConsoleUI.print("Masukkan nama pengguna yang memberi ulasan: ");
         String namaPengguna = scanner.nextLine();
         boolean penggunaDitemukan = false;
 
@@ -47,7 +46,7 @@ public class HapusUlasan {
         }
 
         if (!penggunaDitemukan) {
-            System.out.println("Nama pengguna tidak ditemukan!");
+            com.method.main.ConsoleUI.println("Nama pengguna tidak ditemukan!");
             return;
         }
 
@@ -63,6 +62,6 @@ public class HapusUlasan {
 
         Rating.hapusRating(namaProduk, namaPengguna);
         moderator.setJumlahUlasanDihapus(1);
-        System.out.println("Ulasan oleh pengguna " + namaPengguna + " untuk produk " + namaProduk + " telah dihapus.");
+        com.method.main.ConsoleUI.println("Ulasan oleh pengguna " + namaPengguna + " untuk produk " + namaProduk + " telah dihapus.");
     }
 }

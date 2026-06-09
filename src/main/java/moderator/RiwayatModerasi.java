@@ -12,12 +12,12 @@ public class RiwayatModerasi {
     }
     
     public static void tampilkanRiwayat() {
-        System.out.println("============================== Riwayat Moderasi ==============================");
+        com.method.main.ConsoleUI.println("============================== Riwayat Moderasi ==============================");
         if (riwayat.isEmpty()) {
-            System.out.println("Tidak ada riwayat moderasi");
+            com.method.main.ConsoleUI.println("Tidak ada riwayat moderasi");
         } else {
             for (int i = 0; i < riwayat.size(); i++) {
-                System.out.println((i + 1) + ". " + riwayat.get(i));
+                com.method.main.ConsoleUI.println((i + 1) + ". " + riwayat.get(i));
             }
         }
     }

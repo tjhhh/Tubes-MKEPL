@@ -12,18 +12,15 @@ public class Produk {
     private int harga;
     private String deskripsi;
     private ArrayList<Komentar> daftarUlasan;
-    private MenuPenjual menuPenjual;
 
-    private static HashMap<String, ArrayList<Produk>> daftarProduk = new HashMap<>();
+    private static Map<String, ArrayList<Produk>> daftarProduk = new HashMap<>();
     
     public Produk(String nama, int harga, String deskripsi) {
         this.nama = nama;
         this.harga = harga;
         this.deskripsi = deskripsi;
     }
-    
     public Produk() {
-        this.menuPenjual = new MenuPenjual();
     }
     
     /**
@@ -37,38 +34,38 @@ public class Produk {
         daftarProduk.put("Rahmah", produkRahmah);
     }
     
-    public static HashMap<String, ArrayList<Produk>> getDaftarProduk() {
+    public static Map<String, ArrayList<Produk>> getDaftarProduk() {
         return daftarProduk;
     }
 
     public static void tampilkanSemuaProduk() {
         initializeDaftarProduk();
         if (getDaftarProduk().isEmpty()) {
-            System.out.println("Tidak ada produk yang tersedia.");
+            com.method.main.ConsoleUI.println("Tidak ada produk yang tersedia.");
         } else {
-            System.out.println("==============================================================================");
-            System.out.println("                                DAFTAR PRODUK                               ");
-            System.out.println("==============================================================================");
+            com.method.main.ConsoleUI.println("==============================================================================");
+            com.method.main.ConsoleUI.println("                                DAFTAR PRODUK                               ");
+            com.method.main.ConsoleUI.println("==============================================================================");
             
             for (Map.Entry<String, ArrayList<Produk>> entry : getDaftarProduk().entrySet()) {
                 String penjual = entry.getKey();
                 ArrayList<Produk> produkList = entry.getValue();
                 
-                System.out.println("Penjual\t\t: " + penjual);
+                com.method.main.ConsoleUI.println("Penjual\t\t: " + penjual);
                 for (Produk produk : produkList) {
                     produk.tampilkanInfo();
-                    System.out.println("\nUlasan dan Rating");
+                    com.method.main.ConsoleUI.println("\nUlasan dan Rating");
                     Rating.tampilkanRating(produk.getNama()); 
-                    System.out.println("------------------------------------------------------------------------------");
+                    com.method.main.ConsoleUI.println("------------------------------------------------------------------------------");
                 }
             }
         }
     }
 
     public void tampilkanInfo() {
-        System.out.println("Nama Produk\t: " + nama);
-        System.out.println("Harga\t\t: Rp" + harga);
-        System.out.println("Deskripsi\t: " + deskripsi);
+        com.method.main.ConsoleUI.println("Nama Produk\t: " + nama);
+        com.method.main.ConsoleUI.println("Harga\t\t: Rp" + harga);
+        com.method.main.ConsoleUI.println("Deskripsi\t: " + deskripsi);
     }
     
     public String getNama() {
@@ -79,30 +76,29 @@ public class Produk {
         daftarUlasan.add(komentar);
     }
     
-    public void menuProduk(){
+    public void menuProduk(Scanner scanner){
         initializeDaftarProduk();
-        Scanner sc = new Scanner(System.in);
             while(true) {
                 tampilkanSemuaProduk();
-                System.out.println("================================ Tinjau Produk ===============================");
-                System.out.println("1. Balas Ulasan");
-                System.out.println("2. Lapor Ulasan");
-                System.out.println("3. Keluar");
-                System.out.print("Pilih menu: ");
-                int pilih = sc.nextInt();
+                com.method.main.ConsoleUI.println("================================ Tinjau Produk ===============================");
+                com.method.main.ConsoleUI.println("1. Balas Ulasan");
+                com.method.main.ConsoleUI.println("2. Lapor Ulasan");
+                com.method.main.ConsoleUI.println("3. Keluar");
+                com.method.main.ConsoleUI.print("Pilih menu: ");
+                int pilih = scanner.nextInt();
 
                 switch(pilih) {
                     case 1 :
-                        BalasUlasan.balasUlasan();
+                        BalasUlasan.balasUlasan(scanner);
                         break;
                     case 2 :
-                        LaporUlasan.pilihDanLaporUlasan();
+                        LaporUlasan.pilihDanLaporUlasan(scanner);
                         break;
                     case 3:
-                        System.out.println("Kembali ke menu sebelumnya...");
+                        com.method.main.ConsoleUI.println("Kembali ke menu sebelumnya...");
                         return;
                     default:
-                        System.out.println("Pilihan tidak valid! Silakan coba lagi.");
+                        com.method.main.ConsoleUI.println("Pilihan tidak valid! Silakan coba lagi.");
                 }
             }
     }  
