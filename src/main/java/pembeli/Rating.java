@@ -109,6 +109,26 @@ public class Rating {
         }
         return result;
     }
+
+    public static Rating cariRating(String namaProduk, String namaPengguna) {
+        for (Rating r : daftarRating) {
+            if (r.getPengguna().equalsIgnoreCase(namaPengguna) && r.getNamaProduk().equalsIgnoreCase(namaProduk)) {
+                return r;
+            }
+        }
+        return null;
+    }
+
+    public void tampilkanDetail() {
+        com.method.main.ConsoleUI.println("\nUlasan dan Rating");
+        com.method.main.ConsoleUI.println("Pengguna       : " + getPengguna());
+        com.method.main.ConsoleUI.println("Tanggal Ulasan : " + getTanggalUlasan());
+        com.method.main.ConsoleUI.println("Rating         : " + getRatingBintang() + " bintang");
+        com.method.main.ConsoleUI.println("Komentar       :");
+        for (Komentar komentar : getDaftarKomentar()) {
+            com.method.main.ConsoleUI.println("  - " + komentar.getKomentarText());
+        }
+    }
     
     public static void hapusRating(String namaProduk, String pengguna) {
         boolean ditemukan = false;
