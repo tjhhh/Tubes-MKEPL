@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import pembeli.Komentar;
 import pembeli.Rating;
 
+import java.util.List;
+
 public class LaporUlasan {
     private final String namaProduk;
     private final String namaPengguna;
     private final String komentar;
-    private static final ArrayList<LaporUlasan> ulasanDilanggar = new ArrayList<>();
+    private static final List<LaporUlasan> ulasanDilanggar = new ArrayList<>();
 
     public LaporUlasan(String namaProduk, String namaPengguna, String komentar) {
         this.namaProduk = namaProduk;
@@ -29,7 +31,7 @@ public class LaporUlasan {
         return komentar;
     }
 
-    public static ArrayList<LaporUlasan> getUlasanDilanggar() {
+    public static List<LaporUlasan> getUlasanDilanggar() {
         return ulasanDilanggar;
     }
 

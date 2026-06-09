@@ -2,7 +2,6 @@ package pembeli;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,7 +35,7 @@ class RatingTest {
 
     @Test
     void testGetDaftarRating() {
-        ArrayList<Rating> daftar = Rating.getDaftarRating();
+        java.util.List<Rating> daftar = Rating.getDaftarRating();
         assertNotNull(daftar);
         assertFalse(daftar.isEmpty());
         assertEquals("Laptop ABC", daftar.get(0).getNamaProduk());
