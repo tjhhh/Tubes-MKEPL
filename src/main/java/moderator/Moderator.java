@@ -20,7 +20,7 @@ public class Moderator extends Pengguna {
         while (true) { 
             com.method.main.ConsoleUI.println("================================ Login Moderator =============================");
             String[] credentials = Pengguna.promptLogin(scan, "moderator");
-            if (credentials == null) break;
+            if (credentials.length == 0) break;
 
             Moderator moderator = cariModerator(credentials[0], credentials[1]);
             if (moderator != null) {

@@ -19,7 +19,7 @@ public class Penjual extends Pengguna {
         while (true) {
             com.method.main.ConsoleUI.println("================================ Login Penjual ===============================");
             String[] credentials = Pengguna.promptLogin(scan, "penjual");
-            if (credentials == null) break;
+            if (credentials.length == 0) break;
 
             Penjual penjual = cariPenjual(credentials[0], credentials[1]);
             if (penjual != null) {

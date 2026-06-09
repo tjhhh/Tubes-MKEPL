@@ -41,7 +41,7 @@ public class Pembeli extends Pengguna {
         while (true) {
             com.method.main.ConsoleUI.println("================================= Login Pembeli ==============================");
             String[] credentials = Pengguna.promptLogin(scan, "pembeli");
-            if (credentials == null) break;
+            if (credentials.length == 0) break;
 
             Pembeli pembeli = cariPembeli(credentials[0], credentials[1]);
             if (pembeli != null) {

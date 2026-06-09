@@ -6,7 +6,7 @@ public abstract class Pengguna {
     private String password;
     private String nomorTelepon;
 
-    public Pengguna(String nama, String email, String password, String nomorTelepon) {
+    protected Pengguna(String nama, String email, String password, String nomorTelepon) {
         this.nama = nama;
         this.email = email;
         this.password = password;
@@ -76,7 +76,7 @@ public abstract class Pengguna {
         String email = scan.nextLine();
         if (email.equalsIgnoreCase("exit")) {
             com.method.main.ConsoleUI.println("Anda keluar dari login " + role + ".");
-            return null;
+            return new String[0];
         }
         com.method.main.ConsoleUI.print("Password: ");
         String password = scan.nextLine();
