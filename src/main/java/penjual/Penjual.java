@@ -37,7 +37,7 @@ public class Penjual extends Pengguna {
                 menu.aksi();
             } else {
                 System.out.println("Login gagal. Email atau password salah. Coba lagi.");
-                System.out.println("test");
+
             }
         }
     }
