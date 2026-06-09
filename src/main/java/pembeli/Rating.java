@@ -129,6 +129,24 @@ public class Rating {
             com.method.main.ConsoleUI.println("  - " + komentar.getKomentarText());
         }
     }
+
+    public static Rating cariDanTampilkanRating(java.util.Scanner scanner, String aksi) {
+        com.method.main.ConsoleUI.print("Masukkan nama produk yang ulasannya ingin " + aksi + ": ");
+        String namaProduk = scanner.nextLine();
+
+        com.method.main.ConsoleUI.print("Masukkan nama pengguna yang ulasannya ingin " + aksi + ": ");
+        String namaPengguna = scanner.nextLine();
+
+        Rating ratingDipilih = cariRating(namaProduk, namaPengguna);
+
+        if (ratingDipilih == null) {
+            com.method.main.ConsoleUI.println("Ulasan untuk produk \"" + namaProduk + "\" dari pengguna \"" + namaPengguna + "\" tidak ditemukan!");
+            return null;
+        }
+
+        ratingDipilih.tampilkanDetail();
+        return ratingDipilih;
+    }
     
     public static void hapusRating(String namaProduk, String pengguna) {
         boolean ditemukan = false;

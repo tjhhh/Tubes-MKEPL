@@ -24,12 +24,9 @@ public class MenuPenjual implements Menu {
 
     @Override
     public void aksi(Scanner scanner) {
-        
         while (true) {
             tampilkanMenu();
-            int pilihan = com.method.main.ConsoleUI.getPilihan(scanner, "Pilih menu: ");
-
-            switch (pilihan) {
+            switch (com.method.main.ConsoleUI.getPilihan(scanner, "Pilih menu: ")) {
                 case 1:
                     produk.menuProduk(scanner);
                     break;

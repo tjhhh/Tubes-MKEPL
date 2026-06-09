@@ -48,29 +48,17 @@ public class LaporUlasan {
     }
 
     public static void pilihDanLaporUlasan(Scanner scanner) {
-        com.method.main.ConsoleUI.print("Masukkan nama produk yang ulasannya ingin dilaporkan: ");
-        String namaProduk = scanner.nextLine();
-
-        com.method.main.ConsoleUI.print("Masukkan nama pengguna yang ulasannya ingin dilaporkan: ");
-        String namaPengguna = scanner.nextLine();
-
-        Rating ratingDipilih = Rating.cariRating(namaProduk, namaPengguna);
-
-        if (ratingDipilih == null) {
-            com.method.main.ConsoleUI.println("Ulasan untuk produk \"" + namaProduk + "\" dari pengguna \"" + namaPengguna + "\" tidak ditemukan!");
-            return;
-        }
-
-        ratingDipilih.tampilkanDetail();
+        Rating ratingDipilih = Rating.cariDanTampilkanRating(scanner, "dilaporkan");
+        if (ratingDipilih == null) return;
 
         com.method.main.ConsoleUI.print("\nApakah Anda ingin melaporkan ulasan ini? (ya/tidak): ");
         String konfirmasi = scanner.nextLine();
 
         if (konfirmasi.equalsIgnoreCase("ya")) {
             for (Komentar komentar : ratingDipilih.getDaftarKomentar()) {
-                ulasanDilanggar.add(new LaporUlasan(namaProduk, namaPengguna, komentar.getKomentarText()));
+                ulasanDilanggar.add(new LaporUlasan(ratingDipilih.getNamaProduk(), ratingDipilih.getPengguna(), komentar.getKomentarText()));
             }
-            com.method.main.ConsoleUI.println("Ulasan untuk produk \"" + namaProduk + "\" oleh pengguna \"" + namaPengguna + "\" telah dilaporkan.");
+            com.method.main.ConsoleUI.println("Ulasan untuk produk \"" + ratingDipilih.getNamaProduk() + "\" oleh pengguna \"" + ratingDipilih.getPengguna() + "\" telah dilaporkan.");
         } else {
             com.method.main.ConsoleUI.println("Ulasan tidak dilaporkan.");
         }
