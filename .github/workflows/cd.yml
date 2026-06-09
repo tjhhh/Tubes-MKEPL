@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  packages: write
 
 jobs:
   deployment:
@@ -23,6 +24,7 @@ jobs:
           distribution: temurin
           java-version: ${{ vars.JAVA_VERSION || '21' }}
           cache: maven
+          server-id: github
 
       - name: Package Application
         run: mvn -B clean package -DskipTests
@@ -38,5 +40,10 @@ jobs:
         with:
           files: target/*.jar
           generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to GitHub Packages
+        run: mvn -B deploy -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
