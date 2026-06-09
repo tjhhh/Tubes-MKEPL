@@ -4,26 +4,26 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
-public class ProdukTest {
+class ProdukTest {
 
     @Test
-    public void testConstructorAndGetters() {
+    void testConstructorAndGetters() {
         Produk produk = new Produk("Laptop ABC", 5000000, "Laptop dengan spesifikasi tinggi");
         assertEquals("Laptop ABC", produk.getNama());
     }
 
     @Test
-    public void testDefaultConstructor() {
+    void testDefaultConstructor() {
         Produk produk = new Produk();
         assertNull(produk.getNama());
     }
 
     @Test
-    public void testInitializeDaftarProduk() {
+    void testInitializeDaftarProduk() {
         Produk.initializeDaftarProduk();
-        HashMap<String, ArrayList<Produk>> daftar = Produk.getDaftarProduk();
+        Map<String, ArrayList<Produk>> daftar = Produk.getDaftarProduk();
         assertNotNull(daftar);
         assertTrue(daftar.containsKey("Rahmah"));
         

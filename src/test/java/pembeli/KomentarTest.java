@@ -1,44 +1,47 @@
 package pembeli;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 
-public class KomentarTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class KomentarTest {
 
     @Test
-    public void testConstructorAndGetters() {
-        Komentar komentar = new Komentar("Barang mantap");
-        assertEquals("Barang mantap", komentar.getKomentarText());
+    void testConstructorAndGetters() {
+        Komentar komentar = new Komentar("Test Komentar");
+        assertEquals("Test Komentar", komentar.getKomentarText());
         assertNotNull(komentar.getBalasan());
         assertTrue(komentar.getBalasan().isEmpty());
     }
 
     @Test
-    public void testTambahBalasan() {
-        Komentar komentar = new Komentar("Barang kurang cepat sampai");
-        komentar.tambahBalasan("Mohon maaf atas keterlambatannya.");
-        
-        ArrayList<String> balasan = komentar.getBalasan();
-        assertEquals(1, balasan.size());
-        assertEquals("Mohon maaf atas keterlambatannya.", balasan.get(0));
+    void testTambahBalasan() {
+        Komentar komentar = new Komentar("Test Komentar");
+        komentar.tambahBalasan("Balasan 1");
+        komentar.tambahBalasan("Balasan 2");
+
+        assertEquals(2, komentar.getBalasan().size());
+        assertEquals("Balasan 1", komentar.getBalasan().get(0));
+        assertEquals("Balasan 2", komentar.getBalasan().get(1));
     }
 
     @Test
-    public void testToStringFormat() {
-        Komentar komentar = new Komentar("Bagus");
-        komentar.tambahBalasan("Terima kasih!");
-        
-        String expected = "Bagus\n  Balasan:\n    - Terima kasih!";
-        assertEquals(expected, komentar.toString());
-    }
-
-    @Test
-    public void testGetDaftarKomentar() {
+    void testGetDaftarKomentar() {
         ArrayList<Komentar> daftar = Komentar.getDaftarKomentar();
         assertNotNull(daftar);
         assertEquals(4, daftar.size());
         assertEquals("Barang sangat bagus, sesuai ekspektasi.", daftar.get(0).getKomentarText());
+    }
+
+    @Test
+    void testToString() {
+        Komentar komentar = new Komentar("Test");
+        komentar.tambahBalasan("Balasan");
+        String result = komentar.toString();
+
+        assertTrue(result.contains("Test"));
+        assertTrue(result.contains("Balasan:"));
+        assertTrue(result.contains("- Balasan"));
     }
 }

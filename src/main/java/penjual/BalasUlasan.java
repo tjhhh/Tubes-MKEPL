@@ -5,53 +5,39 @@ import pembeli.Komentar;
 import java.util.Scanner;
 
 public class BalasUlasan {
-    public static void balasUlasan() {
-        Scanner sc = new Scanner(System.in);
 
+    private BalasUlasan() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    public static void balasUlasan(Scanner scanner) {
         Produk.tampilkanSemuaProduk();
 
-        System.out.print("Masukkan nama produk yang ulasannya ingin dibalas: ");
-        String namaProduk = sc.nextLine();
+        com.method.main.ConsoleUI.print("Masukkan nama produk yang ulasannya ingin dibalas: ");
+        String namaProduk = scanner.nextLine();
 
-        System.out.print("Masukkan nama pengguna yang ulasannya ingin dibalas: ");
-        String namaPengguna = sc.nextLine();
+        com.method.main.ConsoleUI.print("Masukkan nama pengguna yang ulasannya ingin dibalas: ");
+        String namaPengguna = scanner.nextLine();
 
-        boolean ulasanDitemukan = false;
-        Rating ratingDipilih = null;
+        Rating ratingDipilih = Rating.cariRating(namaProduk, namaPengguna);
 
-        for (Rating rating : Rating.getDaftarRating()) {
-            if (rating.getNamaProduk().equalsIgnoreCase(namaProduk) &&
-                rating.getPengguna().equalsIgnoreCase(namaPengguna)) {
-                ulasanDitemukan = true;
-                ratingDipilih = rating;
-                break;
-            }
-        }
-
-        if (!ulasanDitemukan) {
-            System.out.println("Ulasan untuk produk \"" + namaProduk + "\" dari pengguna \"" + namaPengguna + "\" tidak ditemukan!");
+        if (ratingDipilih == null) {
+            com.method.main.ConsoleUI.println("Ulasan untuk produk \"" + namaProduk + "\" dari pengguna \"" + namaPengguna + "\" tidak ditemukan!");
             return;
         }
 
-        System.out.println("\nUlasan dan Rating");
-        System.out.println("Pengguna       : " + ratingDipilih.getPengguna());
-        System.out.println("Tanggal Ulasan : " + ratingDipilih.getTanggalUlasan());
-        System.out.println("Rating         : " + ratingDipilih.getRatingBintang() + " bintang");
-        System.out.println("Komentar       :");
-        for (Komentar komentar : ratingDipilih.getDaftarKomentar()) {
-            System.out.println("  - " + komentar.getKomentarText());
-        }
+        ratingDipilih.tampilkanDetail();
 
-        System.out.print("\nMasukkan balasan Anda untuk ulasan ini: ");
-        String balasan = sc.nextLine();
+        com.method.main.ConsoleUI.print("\nMasukkan balasan Anda untuk ulasan ini: ");
+        String balasan = scanner.nextLine();
 
         for (Komentar komentar : ratingDipilih.getDaftarKomentar()) {
             komentar.tambahBalasan(balasan);
         }
 
-        System.out.println("\nBalasan Anda telah ditambahkan untuk ulasan pengguna \"" + namaPengguna + "\":");
+        com.method.main.ConsoleUI.println("\nBalasan Anda telah ditambahkan untuk ulasan pengguna \"" + namaPengguna + "\":");
         for (Komentar komentar : ratingDipilih.getDaftarKomentar()) {
-            System.out.println("  \"" + komentar.getKomentarText() + "\" -> \"" + balasan + "\"");
+            com.method.main.ConsoleUI.println("  \"" + komentar.getKomentarText() + "\" -> \"" + balasan + "\"");
         }
     }
 }

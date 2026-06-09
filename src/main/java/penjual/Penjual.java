@@ -7,11 +7,9 @@ import com.method.main.Pengguna;
 
 public class Penjual extends Pengguna {
 
-    private static final ArrayList<Penjual> daftarPenjual = new ArrayList<>() {
-        {
-            add(new Penjual("Rahmah Aisyah", "rahmah@gmail.com", "rahmah123", "085312436789"));
-        }
-    };
+    private static final ArrayList<Penjual> daftarPenjual = new ArrayList<>(
+        java.util.Arrays.asList(new Penjual("Rahmah Aisyah", "rahmah@gmail.com", "rahmah123", "085312436789"))
+    );
 
     public Penjual(String nama, String email, String password, String nomorTelepon) {
         super(nama, email, password, nomorTelepon);
@@ -19,25 +17,17 @@ public class Penjual extends Pengguna {
 
     public static void loginPenjual(Scanner scan) {
         while (true) {
-            System.out.println("================================ Login Penjual ===============================");
-            System.out.println("Ketik 'exit'untuk keluar dari login penjual.");
-            System.out.print("Email: ");
-            String email = scan.nextLine();
-            if (email.equalsIgnoreCase("exit")) {
-                System.out.println("Anda keluar dari login penjual.");
-                break;
-            }
-            System.out.print("Password: ");
-            String password = scan.nextLine();
+            com.method.main.ConsoleUI.println("================================ Login Penjual ===============================");
+            String[] credentials = Pengguna.promptLogin(scan, "penjual");
+            if (credentials.length == 0) break;
 
-            Penjual penjual = cariPenjual(email, password);
+            Penjual penjual = cariPenjual(credentials[0], credentials[1]);
             if (penjual != null) {
-                System.out.println("Login berhasil. Selamat datang, " + penjual.getNama() + "!");
+                com.method.main.ConsoleUI.println("Login berhasil. Selamat datang, " + penjual.getNama() + "!");
                 MenuPenjual menu = new MenuPenjual(penjual);
-                menu.aksi();
+                menu.aksi(scan);
             } else {
-                System.out.println("Login gagal. Email atau password salah. Coba lagi.");
-
+                com.method.main.ConsoleUI.println("Login gagal. Email atau password salah. Coba lagi.");
             }
         }
     }
@@ -53,7 +43,7 @@ public class Penjual extends Pengguna {
 
     @Override
     public void jenisPengguna() {
-        System.out.println("=================================== Penjual ==================================");
+        com.method.main.ConsoleUI.println("=================================== Penjual ==================================");
         super.tampilkanProfil();
     }
 }
