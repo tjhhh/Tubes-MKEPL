@@ -19,17 +19,10 @@ public class Moderator extends Pengguna {
     public static void loginModerator(Scanner scan) { 
         while (true) { 
             com.method.main.ConsoleUI.println("================================ Login Moderator =============================");
-            com.method.main.ConsoleUI.println("Ketik 'exit'untuk keluar dari login moderator.");
-            com.method.main.ConsoleUI.print("Email: ");
-            String email = scan.nextLine();
-            if (email.equalsIgnoreCase("exit")) {
-                com.method.main.ConsoleUI.println("Anda keluar dari login penjual.");
-                break; 
-            }
-            com.method.main.ConsoleUI.print("Password: ");
-            String password = scan.nextLine();
+            String[] credentials = Pengguna.promptLogin(scan, "moderator");
+            if (credentials == null) break;
 
-            Moderator moderator = cariModerator(email, password);
+            Moderator moderator = cariModerator(credentials[0], credentials[1]);
             if (moderator != null) {
                 com.method.main.ConsoleUI.println("Login berhasil. Selamat datang, " + moderator.getNama() + "!");
                 MenuModerator menu = new MenuModerator(moderator);

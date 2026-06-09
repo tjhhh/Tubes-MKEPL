@@ -40,17 +40,10 @@ public class Pembeli extends Pengguna {
     public static void loginPembeli(Scanner scan) {
         while (true) {
             com.method.main.ConsoleUI.println("================================= Login Pembeli ==============================");
-            com.method.main.ConsoleUI.println("Ketik 'exit' untuk keluar dari login pembeli.");
-            com.method.main.ConsoleUI.print("Email: ");
-            String email = scan.nextLine();
-            if (email.equalsIgnoreCase("exit")) {
-                com.method.main.ConsoleUI.println("Anda keluar dari login penjual.");
-                break; 
-            }
-            com.method.main.ConsoleUI.print("Password: ");
-            String password = scan.nextLine();
+            String[] credentials = Pengguna.promptLogin(scan, "pembeli");
+            if (credentials == null) break;
 
-            Pembeli pembeli = cariPembeli(email, password);
+            Pembeli pembeli = cariPembeli(credentials[0], credentials[1]);
             if (pembeli != null) {
                 com.method.main.ConsoleUI.println("Login berhasil. Selamat datang, " + pembeli.getNama() + "!");
                 MenuPembeli menu = new MenuPembeli(pembeli);

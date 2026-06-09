@@ -18,24 +18,16 @@ public class Penjual extends Pengguna {
     public static void loginPenjual(Scanner scan) {
         while (true) {
             com.method.main.ConsoleUI.println("================================ Login Penjual ===============================");
-            com.method.main.ConsoleUI.println("Ketik 'exit'untuk keluar dari login penjual.");
-            com.method.main.ConsoleUI.print("Email: ");
-            String email = scan.nextLine();
-            if (email.equalsIgnoreCase("exit")) {
-                com.method.main.ConsoleUI.println("Anda keluar dari login penjual.");
-                break;
-            }
-            com.method.main.ConsoleUI.print("Password: ");
-            String password = scan.nextLine();
+            String[] credentials = Pengguna.promptLogin(scan, "penjual");
+            if (credentials == null) break;
 
-            Penjual penjual = cariPenjual(email, password);
+            Penjual penjual = cariPenjual(credentials[0], credentials[1]);
             if (penjual != null) {
                 com.method.main.ConsoleUI.println("Login berhasil. Selamat datang, " + penjual.getNama() + "!");
                 MenuPenjual menu = new MenuPenjual(penjual);
                 menu.aksi(scan);
             } else {
                 com.method.main.ConsoleUI.println("Login gagal. Email atau password salah. Coba lagi.");
-
             }
         }
     }

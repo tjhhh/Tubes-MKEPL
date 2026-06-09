@@ -69,4 +69,17 @@ public abstract class Pengguna {
         com.method.main.ConsoleUI.println("Nomor Telepon: " + nomorTelepon);
         com.method.main.ConsoleUI.println();
     }
+
+    public static String[] promptLogin(java.util.Scanner scan, String role) {
+        com.method.main.ConsoleUI.println("Ketik 'exit' untuk keluar dari login " + role + ".");
+        com.method.main.ConsoleUI.print("Email: ");
+        String email = scan.nextLine();
+        if (email.equalsIgnoreCase("exit")) {
+            com.method.main.ConsoleUI.println("Anda keluar dari login " + role + ".");
+            return null;
+        }
+        com.method.main.ConsoleUI.print("Password: ");
+        String password = scan.nextLine();
+        return new String[]{email, password};
+    }
 }
