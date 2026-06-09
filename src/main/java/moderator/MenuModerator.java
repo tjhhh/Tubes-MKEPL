@@ -25,13 +25,9 @@ public class MenuModerator implements Menu {
 
     @Override
     public void aksi(Scanner scanner) {
-        int pilihan;
-
         while (true) {
             tampilkanMenu();
-            pilihan = com.method.main.ConsoleUI.getPilihan(scanner, "Pilih aksi: ");
-
-            switch (pilihan) {
+            switch (com.method.main.ConsoleUI.getPilihan(scanner, "Pilih aksi: ")) {
                 case 1:
                     lihatLaporan();
                     break;

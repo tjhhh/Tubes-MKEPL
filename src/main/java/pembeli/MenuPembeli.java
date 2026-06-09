@@ -24,13 +24,9 @@ public class MenuPembeli implements Menu {
 
     @Override
     public void aksi(Scanner scanner) {
-        int pilihan;
-
         while (true) {
             tampilkanMenu();
-            pilihan = com.method.main.ConsoleUI.getPilihan(scanner, "Pilih menu : ");
-
-            switch (pilihan) {
+            switch (com.method.main.ConsoleUI.getPilihan(scanner, "Pilih menu : ")) {
                 case 1:
                     Produk.tampilkanSemuaProduk();
                     break;

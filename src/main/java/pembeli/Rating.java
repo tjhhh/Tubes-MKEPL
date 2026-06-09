@@ -2,14 +2,21 @@ package pembeli;
 
 import java.util.ArrayList;
 
+import java.util.List;
+
 public class Rating {
     private String namaProduk;
     private String pengguna;
     private String tanggalUlasan;
     private int ratingBintang;
-    private ArrayList<Komentar> daftarKomentar;
+    private List<Komentar> daftarKomentar;
 
-    private static ArrayList<Rating> daftarRating = new ArrayList<>();
+    private static final String LBL_PENGGUNA = "Pengguna       : ";
+    private static final String LBL_TANGGAL = "Tanggal Ulasan : ";
+    private static final String LBL_RATING = "Rating         : ";
+    private static final String LBL_KOMENTAR = "Komentar       :";
+
+    private static final List<Rating> daftarRating = new ArrayList<>();
 
     static {
         Rating rating1 = new Rating("Laptop ABC", "Kroos", "2024-12-01", 5);
@@ -46,7 +53,7 @@ public class Rating {
         return namaProduk;
     }
 
-    public ArrayList<Komentar> getDaftarKomentar() {
+    public List<Komentar> getDaftarKomentar() {
         return daftarKomentar;
     }
 
@@ -62,34 +69,38 @@ public class Rating {
         return ratingBintang;
     }
 
-    public static ArrayList<Rating> getDaftarRating() {
+    public static List<Rating> getDaftarRating() {
         return daftarRating;
     }
 
+    private static void cetakSatuRating(Rating rating) {
+        com.method.main.ConsoleUI.println(LBL_PENGGUNA + rating.getPengguna());
+        com.method.main.ConsoleUI.println(LBL_TANGGAL + rating.getTanggalUlasan());
+        com.method.main.ConsoleUI.println(LBL_RATING + rating.getRatingBintang() + " bintang");
+        com.method.main.ConsoleUI.println(LBL_KOMENTAR);
+
+        for (Komentar komentar : rating.getDaftarKomentar()) {
+            com.method.main.ConsoleUI.println("  - " + komentar.getKomentarText());
+
+            ArrayList<String> balasanList = komentar.getBalasan();
+            if (!balasanList.isEmpty()) {
+                com.method.main.ConsoleUI.println("    Balasan dari penjual:");
+                for (String balasan : balasanList) {
+                    com.method.main.ConsoleUI.println("      -> " + balasan);
+                }
+            }
+        }
+        com.method.main.ConsoleUI.println();
+    }
+
     public static void tampilkanRating(String namaProduk) {
-        ArrayList<Rating> daftarRating = Rating.getDaftarRating();
+        List<Rating> daftarRating = Rating.getDaftarRating();
 
         boolean ditemukan = false;
         for (Rating rating : daftarRating) {
             if (rating.getNamaProduk().equals(namaProduk)) {
                 ditemukan = true;
-                com.method.main.ConsoleUI.println("Pengguna       : " + rating.getPengguna());
-                com.method.main.ConsoleUI.println("Tanggal Ulasan : " + rating.getTanggalUlasan());
-                com.method.main.ConsoleUI.println("Rating         : " + rating.getRatingBintang() + " bintang");
-                com.method.main.ConsoleUI.println("Komentar       :");
-
-                for (Komentar komentar : rating.getDaftarKomentar()) {
-                    com.method.main.ConsoleUI.println("  - " + komentar.getKomentarText());
-
-                    ArrayList<String> balasanList = komentar.getBalasan();
-                    if (!balasanList.isEmpty()) {
-                        com.method.main.ConsoleUI.println("    Balasan dari penjual:");
-                        for (String balasan : balasanList) {
-                            com.method.main.ConsoleUI.println("      -> " + balasan);
-                        }
-                    }
-                }
-                com.method.main.ConsoleUI.println();
+                cetakSatuRating(rating);
             }
         }
 
@@ -100,14 +111,15 @@ public class Rating {
 
     @Override
     public String toString() {
-        String result = "Pengguna       : " + pengguna + "\n" +
-                        "Tanggal Ulasan : " + tanggalUlasan + "\n" +
-                        "Rating         : " + ratingBintang + " bintang\n" +
-                        "Komentar       :\n";
+        StringBuilder result = new StringBuilder();
+        result.append(LBL_PENGGUNA).append(pengguna).append("\n")
+              .append(LBL_TANGGAL).append(tanggalUlasan).append("\n")
+              .append(LBL_RATING).append(ratingBintang).append(" bintang\n")
+              .append(LBL_KOMENTAR).append("\n");
         for (Komentar komentar : daftarKomentar) {
-            result += "  - " + komentar.getKomentarText() + "\n";
+            result.append("  - ").append(komentar.getKomentarText()).append("\n");
         }
-        return result;
+        return result.toString();
     }
 
     public static Rating cariRating(String namaProduk, String namaPengguna) {
@@ -121,13 +133,31 @@ public class Rating {
 
     public void tampilkanDetail() {
         com.method.main.ConsoleUI.println("\nUlasan dan Rating");
-        com.method.main.ConsoleUI.println("Pengguna       : " + getPengguna());
-        com.method.main.ConsoleUI.println("Tanggal Ulasan : " + getTanggalUlasan());
-        com.method.main.ConsoleUI.println("Rating         : " + getRatingBintang() + " bintang");
-        com.method.main.ConsoleUI.println("Komentar       :");
+        com.method.main.ConsoleUI.println(LBL_PENGGUNA + getPengguna());
+        com.method.main.ConsoleUI.println(LBL_TANGGAL + getTanggalUlasan());
+        com.method.main.ConsoleUI.println(LBL_RATING + getRatingBintang() + " bintang");
+        com.method.main.ConsoleUI.println(LBL_KOMENTAR);
         for (Komentar komentar : getDaftarKomentar()) {
             com.method.main.ConsoleUI.println("  - " + komentar.getKomentarText());
         }
+    }
+
+    public static Rating cariDanTampilkanRating(java.util.Scanner scanner, String aksi) {
+        com.method.main.ConsoleUI.print("Masukkan nama produk yang ulasannya ingin " + aksi + ": ");
+        String namaProduk = scanner.nextLine();
+
+        com.method.main.ConsoleUI.print("Masukkan nama pengguna yang ulasannya ingin " + aksi + ": ");
+        String namaPengguna = scanner.nextLine();
+
+        Rating ratingDipilih = cariRating(namaProduk, namaPengguna);
+
+        if (ratingDipilih == null) {
+            com.method.main.ConsoleUI.println("Ulasan untuk produk \"" + namaProduk + "\" dari pengguna \"" + namaPengguna + "\" tidak ditemukan!");
+            return null;
+        }
+
+        ratingDipilih.tampilkanDetail();
+        return ratingDipilih;
     }
     
     public static void hapusRating(String namaProduk, String pengguna) {
