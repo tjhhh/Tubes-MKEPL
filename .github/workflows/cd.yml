@@ -1,4 +1,4 @@
-name: Continuous Delivery
+name: Continuous Deployment
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  delivery:
+  deployment:
     name: Package and Release
     runs-on: ubuntu-latest
 
