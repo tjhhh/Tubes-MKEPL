@@ -34,3 +34,4 @@ jobs:
 
       - name: Compile Application
         run: mvn -B clean compile
+        
