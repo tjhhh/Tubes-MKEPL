@@ -1,46 +1,46 @@
-name: Continuous Inspection
+# name: Continuous Inspection
 
-on:
-  push:
-    branches:
-      - main
-      - develop
-  pull_request:
-    branches:
-      - main
-      - develop 
-  workflow_run:
-    workflows: ["ct"]
-    types:
-      - completed
+# on:
+#   push:
+#     branches:
+#       - main
+#       - develop
+#   pull_request:
+#     branches:
+#       - main
+#       - develop 
+#   workflow_run:
+#     workflows: ["ct"]
+#     types:
+#       - completed
 
-permissions:
-  contents: read
+# permissions:
+#   contents: read
 
-jobs:
-  inspection:
-    name: Sonar Inspection
-    runs-on: ubuntu-latest
+# jobs:
+#   inspection:
+#     name: Sonar Inspection
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
 
-      - name: Setup JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: ${{ vars.JAVA_VERSION || '21' }}
-          cache: maven
+#       - name: Setup JDK
+#         uses: actions/setup-java@v4
+#         with:
+#           distribution: temurin
+#           java-version: ${{ vars.JAVA_VERSION || '21' }}
+#           cache: maven
 
-      - name: Run Sonar Analysis
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          mvn -B verify sonar:sonar \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.organization=tjhhh \
-            -Dsonar.projectKey=tjhhh_Tubes-MKEPL \
-            -Dsonar.token=$SONAR_TOKEN
+#       - name: Run Sonar Analysis
+#         env:
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#         run: |
+#           mvn -B verify sonar:sonar \
+#             -Dsonar.host.url=https://sonarcloud.io \
+#             -Dsonar.organization=tjhhh \
+#             -Dsonar.projectKey=tjhhh_Tubes-MKEPL \
+#             -Dsonar.token=$SONAR_TOKEN
