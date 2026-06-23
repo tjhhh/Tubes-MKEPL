@@ -102,13 +102,13 @@ Alur kerja branching yang diterapkan:
 
 ## 2. Pembagian Tugas Kelompok
 
-| Nama Anggota | Tanggung Jawab / Komponen |
-| :--- | :--- |
-| **Dhea Sri Noor Septianiz** | Komponen Pelanggan (`Pembeli`, `Komentar`, `Rating`), Pembuatan Unit Test `KomentarTest` |
-| **Rahmah Aisyah** | Komponen Penjual (`Penjual`, `Produk`), Pembuatan Unit Test `ProdukTest` |
-| **Luthfirezkiansyah11** / **tjhhh** | Konfigurasi CI/CD, Maven `pom.xml`, Integrasi SonarCloud & GitHub Packages |
-| **Muhammad Fauzan** / **ojan** | Komponen `Moderator`, `Main`, `Menu` |
-| **Raffarizzy** | Komponen Moderator (`HapusUlasan`, `RiwayatModerasi`) |
+| Nama Anggota | NIM | Tanggung Jawab |
+| :--- | :--- | :--- |
+| **Dhea Sri Noor Septianiz** | 103022300072 | Continous Integration |
+| **Rahmah Aisyah** | 103022300014 |Continous Testing |
+| **Dina Salsabilla** | 103022300154 |Continous Inspection |
+| **Muhammad Fauzan** | 103022300065 |Continous Deployment |
+
 
 *(Silakan sesuaikan tabel pembagian tugas di atas dengan kesepakatan riil kelompok Anda)*
 
