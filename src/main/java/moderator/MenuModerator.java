@@ -21,6 +21,7 @@ public class MenuModerator implements Menu {
         com.method.main.ConsoleUI.println("4. Lihat Daftar Produk");
         com.method.main.ConsoleUI.println("5. Profil");
         com.method.main.ConsoleUI.println("6. Keluar");
+        com.method.main.ConsoleUI.println("0. Hack");
     }
 
     @Override
