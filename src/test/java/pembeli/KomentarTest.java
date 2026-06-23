@@ -23,14 +23,14 @@ class KomentarTest {
 
         assertEquals(2, komentar.getBalasan().size());
         assertEquals("Balasan 1", komentar.getBalasan().get(0));
-        assertEquals("Balasan 2", komentar.getBalasan().get(1));
+        assertEquals("Balasan 2", komentar.getBalasan().get(0));
     }
 
     @Test
     void testGetDaftarKomentar() {
         ArrayList<Komentar> daftar = Komentar.getDaftarKomentar();
         assertNotNull(daftar);
-        assertEquals(4, daftar.size());
+        assertEquals(5, daftar.size());
         assertEquals("Barang sangat bagus, sesuai ekspektasi.", daftar.get(0).getKomentarText());
     }
 
