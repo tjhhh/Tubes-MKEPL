@@ -9,6 +9,10 @@ on:
     branches:
       - main
       - develop 
+  workflow_run:
+    workflows: ["ct"]
+    types:
+      - completed
 
 permissions:
   contents: read
