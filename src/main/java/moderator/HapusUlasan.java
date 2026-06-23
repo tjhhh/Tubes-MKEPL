@@ -6,6 +6,7 @@ import penjual.Produk;
 import java.util.Scanner;
 import pembeli.Rating;
 
+
 public class HapusUlasan {
 
     private HapusUlasan() {
