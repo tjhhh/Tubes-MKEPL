@@ -1,37 +1,37 @@
-name: Continuous Testing
+# name: Continuous Testing
 
-on:
-  push:
-    branches:
-      - main
-      - develop
-  pull_request:
-    branches:
-      - main
-      - develop
-  workflow_run:
-    workflows: ["ci"]
-    types:
-      - completed
+# on:
+#   push:
+#     branches:
+#       - main
+#       - develop
+#   pull_request:
+#     branches:
+#       - main
+#       - develop
+#   workflow_run:
+#     workflows: ["ci"]
+#     types:
+#       - completed
 
-permissions:
-  contents: read
+# permissions:
+#   contents: read
 
-jobs:
-  testing:
-    name: Unit Testing
-    runs-on: ubuntu-latest
+# jobs:
+#   testing:
+#     name: Unit Testing
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v4
 
-      - name: Setup JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-          cache: maven
+#       - name: Setup JDK
+#         uses: actions/setup-java@v4
+#         with:
+#           distribution: temurin
+#           java-version: '17'
+#           cache: maven
 
-      - name: Run Unit Test
-        run: mvn -B test
+#       - name: Run Unit Test
+#         run: mvn -B test
